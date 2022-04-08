@@ -19,13 +19,17 @@ soup = BeautifulSoup(response.text, "html.parser")
 
 a = soup.find("div",class_="s-main-slot s-result-list s-search-results sg-row")
 
-scriptTags = a.findAll('div', attrs = {'data-asin' : True})
+scriptTags = a.findAll('div', attrs={'data-asin':True})
 
 for i in scriptTags:
     print(i["data-asin"])
 
+# proper usage:
 
-
-
-
+asin_data = soup.findAll('div', attrs={'data-asin':True})
+product_asin = []
+for asin in asin_data:
+    if len(asin["data-asin"]) > 1:
+        product_asin.append(asin["data-asin"])
+print(product_asin)
 
