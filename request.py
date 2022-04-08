@@ -29,6 +29,7 @@ for i in scriptTags:
 asin_data = soup.findAll('div', attrs={'data-asin':True})
 product_asin = []
 for asin in asin_data:
+    #  todo: ürün olup olmadığı doğru kontrol edecek bir yapı yapılması gerekebilir.
     if len(asin["data-asin"]) > 1:
         product_asin.append(asin["data-asin"])
 print(product_asin)
