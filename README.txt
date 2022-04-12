@@ -1,5 +1,6 @@
 Amazon/Trendyol Product Finder
 
+environment: Linux Ubunutu 20.04
 to start the program run: --> `python3 main.py
 
 General Usage
