@@ -8,13 +8,18 @@ import random
 class HtmlParser(LoggingMixin):
 
     def html_request(self, url):
+        """
+        All projects requests working from here.
+        Most of the error logging handling in here
 
+        :param url: url
+        :return: BeautifulSoup object
+        """
         proxies, header = self.avoid_detection()
         client = requests.session()
         response = client.get(url, headers=header, proxies=proxies)
         # print(response.status_code)
         if response.status_code == 200:
-            # print(response.status_code)
             return BeautifulSoup(response.text, "html.parser")
         else:
             print(response.status_code)
@@ -30,7 +35,7 @@ class HtmlParser(LoggingMixin):
         # Can be added proxies for detection avoidance.
         # In order to activate proxy: proxy_randon_selector and proxy variables need to be activated.
 
-        proxies = []
+        # proxies = []
 
         # proxy_randon_selector = random.randrange(len(proxies))
         # proxy = proxies[proxy_randon_selector]

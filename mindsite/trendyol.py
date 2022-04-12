@@ -1,11 +1,10 @@
-import time
-
 from mindsite.html_parser import HtmlParser
 from mindsite.log import LoggingMixin
 import json
 import threading
 
 trendyol_multitreded_category_pages_list = []
+
 
 class TrendyolProductFinder(LoggingMixin):
 
@@ -167,29 +166,29 @@ class TrendyolProductFinder(LoggingMixin):
         :param category_urls:
         :return:
         """
+        global trendyol_multitreded_category_pages_list
+        trendyol_multitreded_category_pages_list = []
         threads = []
         total_work = len(category_urls)
-
+        """max thread number"""
+        max_thread_number = 10
         for category_url in category_urls:
-            t = threading.Thread(target=self.categorier, args=(category_url, ))
+            t = threading.Thread(target=self.categorier, args=(category_url,))
             threads.append(t)
         for thread in threads:
             thread.start()
             n = threading.active_count()
-            while n > 10:
+            while n > max_thread_number:
                 n = threading.active_count()
                 thread.join()
                 print("Throttling")
-                print(f'{len(trendyol_multitreded_category_pages_list)/total_work*100:.3f}%')
+                print(f'{len(trendyol_multitreded_category_pages_list) / total_work * 100:.3f}%')
 
         return trendyol_multitreded_category_pages_list
 
     def categorier(self, category_url, ):
         category_search_url = self.generate_category_search_url(category_url)
         category_main_page = self.html_parser.html_request(category_search_url)
-        # if category_main_page:
-        #     print("boş")
-        #     return
         trendyol_multitreded_category_pages_list.append(category_main_page)
 
     def general_category_crawler(self):

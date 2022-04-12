@@ -11,9 +11,9 @@ trendyol_product_ordering = ["PRICE_BY_ASC", "PRICE_BY_DESC", "MOST_RECENT", "BE
 
 # trendyol_category_list = {"Cep Telefonu": ["103498"]}
 
-def generate_dict_from_list(list):
+def generate_dict_from_list(lst):
     categories = {}
-    for i, category in enumerate(list):
+    for i, category in enumerate(lst):
         categories[f'{i + 1}'] = category
     return categories
 
