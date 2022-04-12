@@ -31,9 +31,9 @@ def amazon_product_by_name():
 def trendyol_search_by_name():
     print("Product name:", end=" ")
     product_name = input()
-    categories = generate_dict_from_list(trendyol_product_ordering)
+    orderby = generate_dict_from_list(trendyol_product_ordering)
     print("Which order would you like to search?")
-    print(f"categories: {categories}")
+    print(f"Order by: {orderby}")
     product_ordering = input()
     return product_name, product_ordering
 
@@ -49,10 +49,10 @@ def saving_or_printing(decision, data, file_name):
 
 def menu():
     print("↓ Select the Action you want to use ↓", )
-    print("1- Amazon product search with name.\n"
-          "2- Amazon product search with asin or asins.\n"
+    print("1- Amazon product search with name\n"
+          "2- Amazon product search with asin or asins\n"
           "3- Trendyol product search by name\n"
-          "4- Gather Trendyol category tree.\n"
+          "4- Gather Trendyol category tree\n"
           "5- Trendyol general product crawler\n"
           "6- Exit")
 

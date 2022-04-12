@@ -2,29 +2,29 @@ Amazon/Trendyol Product Finder
 
 to start the program run: --> `python3 main.py
 
-Genel kullanım
+General Usage
 
-1-  Ürün ismi ile amazonda ürün arattırmak. Yüzde 30 çalışıyor. Amazon request i engelliyor genellikle.
-    Kategori seçerken içinde bulunan key value larına girmezseniz hata veriyor. O kısımını düzeltmeye zamanım kalmadı.
+1 - Amazon product search with name
+About 30% of times is working. Usually amazon does not allow to use search bar.
+Be careful to choose valid key value for category dict (1-17). Otherwise, program will crash.
 
-2-  Asin değerleri ile ürün arattırmak. Genelde request doğru dönüyor amazon tarafından.
-    Asin ile aramayı denemek için örnek asin değeri: B09HKMCD9D
+2-  Amazon product search with asin or asins
+Usually works. Example product asin : B09HKMCD9D
 
-3-  Ürün ismi ile trendyolda ürün arattırmak.
-    Sıralama ölçütü seçerken yanlış key girildiğinde hata veriyor.
+3-  Trendyol product search by name
+Be carefully to use valid key for order dict(1-6). Otherwise, program will crash.
 
-4-  Otomatik bir işlem. Aslında ilk düşüncem trendyolun içinde tek bir kategoriyi tamamen taratmaktı ancak 5. seçenekte
-multithread i çalıştırmam uzun sürdüğü için vaktim kalmadı. Şuan için kategori ağacını alıyor sadece trendyoldan.
+4-  Gather Trendyol category tree
+Automated process. Only gathers category tree from Trendyol / save or print. First idea was to make another mechanism
+for searching all products in single category by pagination but operation 5 is working just fine with using threading.
 
-5-  Trendyoldaki bütün kategorileri çekip sonrasında her kategorinin ilk sayfasındaki ürünleri tarıyor. Sonrasında json
-olarak kaydedebiliyorsunuz.
-    Multithread ayarlamadan öncesinde zaman tutmadım ancak her istek yaklaşık 1 sn sürüyordu.
-Şuan toplam 594 kategoriyi 1 dk 10 sn civarlarında tarıyor.
-Ortalama 590 kategorinin requesti doğru geliyor. 7800 civarında ürün verisi almış oluyor.
+5-  Trendyol general product crawler
+Gathers all category urls from Trendyol's main page. After it sends a request to each category and gathers all products
+in first pages for each category / save or print.
 
+Did not time it before using multithread, but I assume each category took about 1 to 0.8 sec.
+After adding threading, total process is taken approximately 1 min 10 sec.
+It is looking for 594 category and usually 590 category request returns successfully. (About 7800 product)
 
-trendyol.py ın içinde "general_category_crawler" fonksiyonu bu işlemi çalıştırıyor. Onun içinde requestler multitred
-işlenmesi için "category_pages" fonksiyonuna gidiyor. Şuan aynı anda 10 işlem yapacak şekilde ayarlandı. Istenir ise
-"max_thread_number" değişkeni değiştirilebilir.
-
-
+In trendyol.py "category_pages" function is operating multithreading. With current setting, there can be 10 thread max.
+It may change by changing "max_thread_number" variable.
